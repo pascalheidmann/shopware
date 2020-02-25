@@ -44,10 +44,6 @@ Ext.define('Shopware.apps.Base.store.Dispatch', {
         property: 'position',
         direction: 'ASC'
     }],
-    filters: [{
-        property: 'active',
-        value: true
-    }],
 
     proxy: {
         type: 'ajax',

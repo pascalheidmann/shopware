@@ -65,24 +65,8 @@ class Repository extends ModelRepository
      */
     public function getActivePaymentsQueryBuilder($filter = null, $order = null)
     {
-        $builder = $this->createQueryBuilder('p');
-        $builder->select(
-            [
-                'p.id as id',
-                'p.name as name',
-                'p.description as description',
-                'p.position as position',
-                'p.active as active',
-            ]
-        );
-        $builder->where('p.active = 1');
-
-        if ($filter !== null) {
-            $builder->addFilter($filter);
-        }
-        if ($order !== null) {
-            $builder->addOrderBy($order);
-        }
+        $builder = $this->getAllPaymentsQueryBuilder($filter, $order);
+        $builder->andWhere('p.active = 1');
 
         return $builder;
     }
@@ -134,6 +118,7 @@ class Repository extends ModelRepository
         if ($order !== null) {
             $builder->addOrderBy($order);
         }
+        $builder->addOrderBy('p.active', 'desc');
 
         return $builder;
     }

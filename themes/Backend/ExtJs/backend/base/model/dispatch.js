@@ -42,9 +42,9 @@ Ext.define('Shopware.apps.Base.model.Dispatch', {
     alternateClassName: 'Shopware.model.Dispatch',
 
     /**
-    * Extends the standard Ext Model
-    * @string
-    */
+     * Extends the standard Ext Model
+     * @string
+     */
     extend: 'Shopware.data.Model',
 
     /**
@@ -54,16 +54,16 @@ Ext.define('Shopware.apps.Base.model.Dispatch', {
     idProperty : 'id',
 
     /**
-    * The fields used for this model
-    * @array
-    */
+     * The fields used for this model
+     * @array
+     */
     fields: [
         //{block name="backend/base/model/dispatch/fields"}{/block}
         { name : 'id', type : 'int' },
         { name : 'name', type : 'string' },
         { name : 'type', type : 'int' },
         { name : 'comment', type : 'string' },
-        { name : 'active', type : 'int' },
+        { name : 'active', type : 'boolean' },
         { name : 'position', type : 'int' }
     ]
 });

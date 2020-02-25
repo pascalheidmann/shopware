@@ -228,44 +228,31 @@ Ext.define('Shopware.apps.Order.view.list.Filter', {
     },
 
     createPaymentField: function() {
-        var me = this,
-            displayTpl = Ext.create('Ext.XTemplate',
-                '<tpl for=".">',
-                '<div class="x-boundlist-item">' +
-                //active renderer
-                '<tpl if="active"">' +
-                '<i class="sprite-tick-small" style="width:12px;height:12px;display:inline-block;margin:0 6px 5px 0;vertical-align:middle;"></i>' +
-                '<tpl else>' +
-                '<i class="sprite-cross-small" style="width:12px;height:12px;display:inline-block;margin:0 6px 5px 0;vertical-align:middle;"></i>' +
-                '</tpl>' +
-
-                ' {literal}{description}{/literal}' +
-                '</div>',
-                '</tpl>'
-            );
+        var me = this;
 
         return Ext.create('Ext.form.field.ComboBox', {
             name: 'orders.paymentId',
             pageSize: 7,
             queryMode: 'remote',
-            store: Ext.create('Shopware.store.Payment', {
-                pageSize: 7,
-                filters: [{
-                    property: 'active',
-                    value: [true, false]
-                }],
-                sorters: [{
-                    property: 'active',
-                    direction: 'DESC'
-                }, {
-                    property: 'position',
-                    direction: 'ASC'
-                }]
-            }),
+            store: Ext.create('Shopware.store.Payment', { pageSize: 10 }),
             valueField: 'id',
-            tpl: displayTpl,
+            displayField: 'description',
             emptyText: me.snippets.empty,
-            fieldLabel: me.snippets.paymentName
+            fieldLabel: me.snippets.paymentName,
+            tpl: Ext.create('Ext.XTemplate',
+                '<tpl for=".">',
+                '<div class="x-boundlist-item">',
+                '<span class="',
+                '<tpl if="active">',
+                'sprite-tick-small',
+                '<tpl else>',
+                'sprite-cross-small',
+                '</tpl>',
+                '" style="display:inline-block;margin:0 1px 0 0;vertical-align:middle;">&nbsp;</span>',
+                '{literal}{description}{/literal}',
+                '</div>',
+                '</tpl>',
+            ),
         });
     },
 
@@ -276,11 +263,25 @@ Ext.define('Shopware.apps.Order.view.list.Filter', {
             name: 'orders.dispatchId',
             pageSize: 7,
             queryMode: 'remote',
-            store: Ext.create('Shopware.store.Dispatch', { pageSize: 7 }),
+            store: Ext.create('Shopware.store.Dispatch', { pageSize: 10 }),
             valueField: 'id',
             displayField: 'name',
             emptyText: me.snippets.empty,
-            fieldLabel: me.snippets.dispatchName
+            fieldLabel: me.snippets.dispatchName,
+            tpl: Ext.create('Ext.XTemplate',
+                '<tpl for=".">',
+                '<div class="x-boundlist-item">',
+                '<span class="',
+                '<tpl if="active">',
+                'sprite-tick-small',
+                '<tpl else>',
+                'sprite-cross-small',
+                '</tpl>',
+                '" style="display:inline-block;margin:0 1px 0 0;vertical-align:middle;">&nbsp;</span>',
+                '{literal}{name}{/literal}',
+                '</div>',
+                '</tpl>',
+            ),
         });
     },
 
